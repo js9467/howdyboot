@@ -6,40 +6,101 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <style>
+    :root {
+      --bg: #faf7f0;
+      --primary: #7b3f00;
+      --accent: #c97b2e;
+      --text: #333333;
+      --muted: #777777;
+      --card: #ffffff;
+      --border: #e0dcd4;
+      --radius: 16px;
+      --shadow: 0 10px 25px rgba(0,0,0,0.06);
+    }
+
+    * { box-sizing: border-box; }
+
     body {
-      margin:0;
-      font-family:sans-serif;
-      color:#333;
-      background:#faf7f0;
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background: var(--bg);
     }
+
     header {
-      background:#fff;
-      border-bottom:1px solid #ddd;
-      padding:1.25rem;
+      background: #fff;
+      border-bottom: 1px solid #ddd;
+      padding: 1.25rem;
     }
+
     .container {
-      max-width:900px;
-      width:100%;
-      margin:auto;
+      max-width: 960px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 1.25rem;
     }
+
+    h1, h2, h3 {
+      color: var(--primary);
+      margin-top: 0;
+    }
+
     section {
-      padding:2rem 0;
-      border-bottom:1px solid #eee;
+      padding: 2rem 0;
+      border-bottom: 1px solid #eee;
     }
-    h1,h2,h3 {
-      color:#7b3f00;
-      margin-top:0;
-    }
+
     iframe {
-      width:100%;
-      border:0;
-      min-height:350px;
+      width: 100%;
+      border: 0;
+      min-height: 350px;
     }
+
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      padding: 1.5rem;
+    }
+
     .footer {
-      padding:2rem;
-      text-align:center;
-      font-size:.8rem;
-      color:#777;
+      padding: 2rem 1.25rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .gallery-card {
+      margin-top: 1rem;
+      text-align: center;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.7rem 1.4rem;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      border: 1px solid transparent;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+
+    .btn-primary:hover {
+      filter: brightness(1.07);
+    }
+
+    .small-note {
+      margin-top: 0.7rem;
+      font-size: 0.8rem;
+      color: var(--muted);
     }
   </style>
 
@@ -54,7 +115,6 @@
   </div>
 </header>
 
-
 <div class="container">
 
   <!-- ABOUT SECTION -->
@@ -65,49 +125,85 @@
       Welcome! We love line dancing and want YOU to feel welcome.
     </p>
 
-    <h3 data-content-key="general_info_heading">General Information & Announcements</h3>
+    <h3 data-content-key="general_info_heading">General Information &amp; Announcements</h3>
 
-    <!-- GOOGLE DOC EMBED -->
-    <iframe src="https://docs.google.com/document/d/e/2PACX-1vSNt_ilcXbHngA8w2L-T0JfaXIp5daI2EERM9YTFvM5x99z2mPXed7bci2X0aZsViCZAhACFt2rN7cj/pub?embedded=true"></iframe>
+    <div class="card">
+      <!-- GOOGLE DOC EMBED -->
+      <iframe src="https://docs.google.com/document/d/e/2PACX-1vSNt_ilcXbHngA8w2L-T0JfaXIp5daI2EERM9YTFvM5x99z2mPXed7bci2X0aZsViCZAhACFt2rN7cj/pub?embedded=true"></iframe>
+    </div>
   </section>
-
 
   <!-- SCHEDULE SECTION -->
   <section>
     <h2 data-content-key="schedule_title">Schedule</h2>
 
     <p data-content-key="schedule_description">
-       Weekly classes and events are listed below. Please check back often!
+      Weekly classes and events are listed in the calendar below.
     </p>
 
-    <!-- CALENDAR EMBED -->
-    <iframe 
-      src="https://calendar.google.com/calendar/embed?src=453b90c61605e8533f9997458c308e04805aeb36294e4fbe58824119e2eaaba7%40group.calendar.google.com&ctz=America%2FNew_York" 
-      style="border:0;" 
-      frameborder="0" 
-      scrolling="no">
-    </iframe>
-
+    <div class="card">
+      <!-- CALENDAR EMBED -->
+      <iframe
+        src="https://calendar.google.com/calendar/embed?src=453b90c61605e8533f9997458c308e04805aeb36294e4fbe58824119e2eaaba7%40group.calendar.google.com&ctz=America%2FNew_York"
+        style="border:0;"
+        frameborder="0"
+        scrolling="no">
+      </iframe>
+    </div>
   </section>
-
 
   <!-- GALLERY SECTION -->
   <section>
     <h2 data-content-key="gallery_title">Photo Gallery</h2>
 
     <p data-content-key="gallery_description">
-      Add photos to the album, and they will appear here automatically.
+      We keep our photos in a Google Photos album so it’s easy to update.
     </p>
 
-    <!-- GOOGLE PHOTOS ALBUM -->
-    <!-- NOTE: Google Photos does not officially support clean iframe embed.
-         Users must click to open album browser view. Still simple to manage. -->
-    <iframe 
-      src="https://photos.app.goo.gl/32WDAnZHoStuUCfs6"
-      style="min-height:400px;">
-    </iframe>
+    <div class="card gallery-card">
+      <p class="small-note" data-content-key="gallery_body">
+        Click the button below to open the gallery in a new tab. New pictures will appear there as they’re added.
+      </p>
+
+      <!-- PUBLIC GOOGLE PHOTOS LINK -->
+      <a
+        href="https://photos.app.goo.gl/32WDAnZHoStuUCfs6"
+        target="_blank"
+        rel="noreferrer"
+        class="btn btn-primary">
+        View Photo Gallery
+      </a>
+
+      <p class="small-note">Opens in a new tab.</p>
+    </div>
   </section>
 
+  <!-- (OPTIONAL) EVENTS LIST – framework only, see explanation below -->
+  <section>
+    <h2 data-content-key="events_title">Events</h2>
+    <p data-content-key="events_intro">
+      Here are a few of our special events. Each one can link to its own photo album or info page.
+    </p>
+
+    <div class="card">
+      <h3 data-content-key="event1_title">Spring Social</h3>
+      <p class="small-note" data-content-key="event1_date">
+        March 23 • 7:00–10:00 PM
+      </p>
+      <p data-content-key="event1_description">
+        A casual night of dancing, snacks, and fun. Great for inviting friends!
+      </p>
+      <!-- For now this can point to the main album or a future per-event album -->
+      <a
+        href="https://photos.app.goo.gl/32WDAnZHoStuUCfs6"
+        target="_blank"
+        rel="noreferrer"
+        class="btn btn-primary">
+        View Photos
+      </a>
+    </div>
+
+  </section>
 
   <!-- CONTACT SECTION -->
   <section>
@@ -124,50 +220,50 @@
     </p>
 
     <p data-content-key="contact_footer">We look forward to dancing with you!</p>
-
   </section>
 
 </div>
-
 
 <footer class="footer">
   © <span id="year"></span> Howdy Boot Line Dancers
 </footer>
 
-
 <script>
-document.getElementById('year').textContent = new Date().getFullYear();
+  document.getElementById('year').textContent = new Date().getFullYear();
 
-// GOOGLE SHEET (CMS)
-const SHEET_URL =
- "https://docs.google.com/spreadsheets/d/e/2PACX-1vSEzDs7LVp6yxuIwme97jEC9akDHKNlmaiH3fmyWMkqlay-CjDa84ElNe0QPUD1LVmuBm4hHGGGlnnF/pub?output=csv";
+  // GOOGLE SHEET (CMS)
+  const SHEET_URL =
+    "https://docs.google.com/spreadsheets/d/e/2PACX-1vSEzDs7LVp6yxuIwme97jEC9akDHKNlmaiH3fmyWMkqlay-CjDa84ElNe0QPUD1LVmuBm4hHGGGlnnF/pub?output=csv";
 
-async function loadContent() {
-  try {
-    const res = await fetch(SHEET_URL);
-    const csv = await res.text();
-    const rows = csv.split("\n").filter(x=>x.trim());
+  async function loadContent() {
+    try {
+      const res = await fetch(SHEET_URL);
+      const csv = await res.text();
+      const rows = csv.split("\n").filter(x => x.trim());
 
-    let start = rows[0].toLowerCase().startsWith("key") ? 1 : 0;
+      let start = rows[0].toLowerCase().startsWith("key") ? 1 : 0;
+      const map = {};
 
-    const map = {};
+      for (let i = start; i < rows.length; i++) {
+        const [rawKey, ...rest] = rows[i].split(",");
+        const key = (rawKey || "").trim();
+        const value = rest.join(",").trim();
+        if (key) map[key] = value;
+      }
 
-    for(let i=start; i<rows.length; i++){
-      const [k,...rest] = rows[i].split(",");
-      map[k.trim()] = rest.join(",").trim();
+      document.querySelectorAll("[data-content-key]").forEach(el => {
+        const key = el.dataset.contentKey;
+        if (map[key]) {
+          el.innerHTML = map[key];
+        }
+      });
+
+    } catch (e) {
+      console.log("Failed to pull Google Sheet. Using fallback text.", e);
     }
-
-    document.querySelectorAll("[data-content-key]").forEach(el=>{
-      const key = el.dataset.contentKey;
-      if(map[key]) el.innerHTML = map[key];
-    });
-
-  } catch(e){
-    console.log("Failed to pull Google Sheet.", e);
   }
-}
 
-loadContent();
+  loadContent();
 </script>
 
 </body>
