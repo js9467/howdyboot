@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Howdy Boot Line Dancers</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body {
+      margin:0;
+      font-family: sans-serif;
+      color:#333;
+      background:#faf7f0;
+    }
+    header {
+      background:#fff;
+      border-bottom:1px solid #ddd;
+      padding:1.25rem;
+    }
+    .container {
+      width:100%;
+      max-width:900px;
+      margin: auto;
+    }
+    h1 {
+      margin-top:0;
+      color:#7b3f00;
+    }
+    section {
+      padding:2rem 0;
+      border-bottom:1px solid #eee;
+    }
+    iframe {
+      width:100%;
+      border:0;
+      min-height:350px;
+    }
+    .footer {
+      padding:2rem;
+      text-align:center;
+      font-size:.8rem;
+      color:#777;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="container">
+    <h1 data-content-key="hero_title">Howdy Boot Line Dancers</h1>
+    <p data-content-key="hero_subtitle">Learn, laugh, line dance!</p>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- About Section -->
+  <section>
+    <h2 data-content-key="about_title">About Us</h2>
+    <p data-content-key="about_paragraph">
+      Welcome! We love line dancing and want YOU to feel welcome.
+    </p>
+
+    <h3>General Info / Announcements</h3>
+
+    <!-- Embedded DOC -->
+    <iframe src="https://docs.google.com/document/d/e/2PACX-1vSNt_ilcXbHngA8w2L-T0JfaXIp5daI2EERM9YTFvM5x99z2mPXed7bci2X0aZsViCZAhACFt2rN7cj/pub?embedded=true"></iframe>
+  </section>
+
+
+  <!-- Schedule Section -->
+  <section>
+    <h2 data-content-key="schedule_title">Schedule</h2>
+    <p data-content-key="schedule_description">
+       Weekly classes & group events shown below.
+    </p>
+
+    <!-- Your DOC is already handling some schedule info,
+         so no calendar is required—but you CAN add one later. -->
+
+  </section>
+
+
+  <!-- Gallery Section -->
+  <section>
+    <h2 data-content-key="gallery_title">Pictures & Gallery</h2>
+    <p data-content-key="gallery_description">
+      Photos update automatically when added to album.
+    </p>
+
+    <!-- Google Photos Album -->
+    <iframe src="https://photos.app.goo.gl/32WDAnZHoStuUCfs6"></iframe>
+  </section>
+
+
+  <!-- Contact -->
+  <section>
+    <h2 data-content-key="contact_title">Contact</h2>
+
+    <p><strong>Email:</strong>
+      <a href="mailto:info@yourstudio.com" data-content-key="contact_email">info@yourstudio.com</a>
+    </p>
+
+    <p><strong>Phone:</strong>
+      <span data-content-key="contact_phone">555-555-5555</span>
+    </p>
+
+    <p data-content-key="contact_footer">We look forward to dancing with you!</p>
+  </section>
+
+</div>
+
+
+<footer class="footer">
+  © <span id="year"></span> Howdy Boot Line Dancers
+</footer>
+
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  const SHEET_URL =
+   "https://docs.google.com/spreadsheets/d/e/2PACX-1vSEzDs7LVp6yxuIwme97jEC9akDHKNlmaiH3fmyWMkqlay-CjDa84ElNe0QPUD1LVmuBm4hHGGGlnnF/pub?output=csv";
+
+  async function loadSheet() {
+    try {
+      const res = await fetch(SHEET_URL);
+      const csv = await res.text();
+      const lines = csv.split("\n").filter(x => x.trim());
+
+      let start = 0;
+      if (lines[0].toLowerCase().startsWith("key")) start = 1;
+
+      const map = {};
+      for (let i=start;i<lines.length;i++){
+        const [k, ...rest] = lines[i].split(",");
+        map[k.trim()] = rest.join(",").trim();
+      }
+
+      document.querySelectorAll("[data-content-key]").forEach(el=>{
+        const key = el.dataset.contentKey;
+        if(map[key]) el.innerHTML = map[key];
+      });
+
+    } catch (err) {
+      console.log("Sheet load failed, fallback text used.", err);
+    }
+  }
+
+  loadSheet();
+</script>
+
+</body>
+</html>
