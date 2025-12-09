@@ -10,13 +10,15 @@
 
   <style>
     :root {
-      --bg: #fff9f5;
-      --primary: #ff5b87;   /* pink from logo */
-      --secondary: #ffb230; /* golden yellow from logo */
+      /* softened, more neutral palette */
+      --bg: #fffdfc;
+      --primary: #e97588;        /* softened coral-pink */
+      --primary-dark: #cc6d7a;
+      --secondary: #f2b35c;      /* warm golden */
       --text: #402b3a;
-      --muted: #8b6f7f;
+      --muted: #77656f;
       --card: #ffffff;
-      --border: #f1d9c9;
+      --border: #e6d7cb;
       --radius-lg: 20px;
       --radius-md: 14px;
       --shadow-soft: 0 12px 30px rgba(0,0,0,0.08);
@@ -27,12 +29,12 @@
     body {
       margin: 0;
       font-family: "Nunito", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: radial-gradient(circle at top, #ffe9f2 0, var(--bg) 52%);
+      background: radial-gradient(circle at top, #fff3f4 0, var(--bg) 52%);
       color: var(--text);
     }
 
     a {
-      color: var(--primary);
+      color: var(--primary-dark);
       text-decoration: none;
     }
     a:hover { text-decoration: underline; }
@@ -50,7 +52,7 @@
       z-index: 10;
       backdrop-filter: blur(14px);
       background: rgba(255, 248, 244, 0.95);
-      border-bottom: 1px solid rgba(255, 189, 140, 0.35);
+      border-bottom: 1px solid rgba(0,0,0,0.06);
     }
 
     .nav {
@@ -73,15 +75,22 @@
     }
 
     .brand-logo {
-      border-radius: 20px;
+      border-radius: 22px;
       background: #fff;
-      box-shadow: 0 12px 30px rgba(255, 106, 155, 0.45);
-      padding: 0.35rem;
+      box-shadow: var(--shadow-soft);
+      padding: 0.4rem;
+      transition: box-shadow 0.15s ease;
     }
+
     .brand-logo img {
       display: block;
-      height: 96px;   /* 👈 bigger logo */
+      height: 110px;   /* more prominent logo */
       width: auto;
+      transition: transform 0.15s ease;
+    }
+
+    .brand-logo:hover img {
+      transform: scale(1.06);
     }
 
     .nav-links {
@@ -98,7 +107,7 @@
       color: var(--text);
     }
     .nav-links a:hover {
-      background: rgba(255, 91, 135, 0.08);
+      background: rgba(233,117,136,0.12);
       text-decoration: none;
     }
 
@@ -130,8 +139,8 @@
       gap: 0.4rem;
       padding: 0.25rem 0.8rem;
       border-radius: 999px;
-      background: #fff1f7;
-      border: 1px dashed rgba(255, 178, 48, 0.7);
+      background: #fff2f5;
+      border: 1px dashed rgba(242,179,92,0.7);
       font-size: 0.85rem;
       color: var(--muted);
       margin-bottom: 0.75rem;
@@ -141,7 +150,7 @@
       font-family: "Baloo 2", cursive;
       font-size: clamp(2rem, 3.2vw, 2.6rem);
       margin: 0 0 0.25rem;
-      color: var(--primary);
+      color: var(--primary-dark);
     }
 
     .hero-subtitle {
@@ -181,20 +190,20 @@
     }
 
     .btn-primary {
-      background: linear-gradient(135deg, var(--primary), #ff7da3);
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
       color: #fff;
-      box-shadow: 0 10px 22px rgba(255, 91, 135, 0.4);
+      box-shadow: 0 10px 22px rgba(233,117,136,0.4);
     }
     .btn-primary:hover {
       transform: translateY(-1px);
-      box-shadow: 0 12px 28px rgba(255, 91, 135, 0.5);
+      box-shadow: 0 12px 28px rgba(233,117,136,0.5);
       text-decoration: none;
     }
 
     .btn-secondary {
       background: #fff;
-      color: var(--primary);
-      border-color: rgba(255, 178, 48, 0.8);
+      color: var(--primary-dark);
+      border-color: rgba(242,179,92,0.8);
     }
     .btn-secondary:hover {
       background: #fff6ea;
@@ -210,7 +219,7 @@
     .hero-card {
       background: #fff;
       border-radius: var(--radius-lg);
-      border: 1px solid rgba(255, 178, 48, 0.45);
+      border: 1px solid rgba(242,179,92,0.45);
       box-shadow: var(--shadow-soft);
       padding: 1.1rem 1.2rem 1.3rem;
       position: relative;
@@ -222,8 +231,8 @@
       position: absolute;
       inset: 0;
       background-image:
-        radial-gradient(circle at 15% 20%, rgba(255, 240, 191, 0.9) 0, transparent 55%),
-        radial-gradient(circle at 80% 80%, rgba(255, 199, 228, 0.9) 0, transparent 50%);
+        radial-gradient(circle at 15% 20%, rgba(255, 240, 191, 0.8) 0, transparent 55%),
+        radial-gradient(circle at 80% 80%, rgba(252, 214, 230, 0.85) 0, transparent 50%);
       opacity: 0.7;
       pointer-events: none;
     }
@@ -234,7 +243,7 @@
       font-weight: 700;
       font-size: 1rem;
       margin-bottom: 0.25rem;
-      color: var(--primary);
+      color: var(--primary-dark);
     }
 
     .hero-card-line {
@@ -250,8 +259,8 @@
       gap: 0.3rem;
       padding: 0.2rem 0.7rem;
       border-radius: 999px;
-      background: rgba(255, 91, 135, 0.08);
-      color: var(--primary);
+      background: rgba(233,117,136,0.08);
+      color: var(--primary-dark);
       font-size: 0.78rem;
       font-weight: 600;
     }
@@ -294,8 +303,13 @@
       display: block;
     }
 
+    /* give calendar a bit more height so it doesn't look smushed */
+    #calendarFrame {
+      min-height: 640px;
+    }
+
     .embed-wrapper.small iframe {
-      min-height: 520px;
+      min-height: 420px; /* a bit shorter so the form doesn't feel endless */
     }
 
     .gallery-card { text-align: center; }
@@ -335,7 +349,7 @@
       gap: 0.4rem;
       padding: 0.25rem 0.8rem;
       border-radius: 999px;
-      border: 1px solid rgba(255, 178, 48, 0.5);
+      border: 1px solid rgba(242,179,92,0.5);
       font-size: 0.8rem;
       color: var(--secondary);
       background: #fff7e8;
@@ -343,8 +357,8 @@
     }
 
     footer {
-      border-top: 1px solid rgba(255, 189, 140, 0.4);
-      background: #fff5ec;
+      border-top: 1px solid rgba(0,0,0,0.06);
+      background: #fff7f2;
       margin-top: 2.5rem;
       padding: 1.2rem 1.25rem 1.8rem;
       font-size: 0.8rem;
@@ -381,7 +395,7 @@
     <section class="hero" id="top">
       <div>
         <div class="hero-tagline" data-content-key="hero_tagline">
-          💖 Volunteer-led line dancing for kids &amp; the community
+          Volunteer-led line dancing for kids &amp; the community
         </div>
 
         <h1 data-content-key="hero_title">The Howdy Boot Line-Dancers</h1>
@@ -490,10 +504,10 @@
         <a
           href="https://photos.app.goo.gl/32WDAnZHoStuUCfs6"
           target="_blank"
-          rel="noreferrer"
+          rel="noopener"
           class="btn btn-primary"
         >
-          View Photo Gallery
+          Open Photo Gallery 📸
         </a>
 
         <div class="small-note">
@@ -549,7 +563,7 @@
           <div class="contact-item" style="margin-top:0.8rem;">
             <div class="contact-label" data-content-key="contact_email_label">Email</div>
             <a
-              href="mailto:info@howdybootlinedancers.com"
+              href="mailto:dbcarvath@gmail.com"
               data-content-key="contact_email_value"
               data-content-attr="href-text-email"
             >
@@ -560,7 +574,7 @@
           <div class="contact-item" style="margin-top:0.8rem;">
             <div class="contact-label" data-content-key="contact_phone_label">Phone / Text</div>
             <a
-              href="tel:+2403382221"
+              href="tel:+12403382221"
               data-content-key="contact_phone_value"
               data-content-attr="href-text-tel"
             >
@@ -603,7 +617,7 @@
     const DOC_BASE_URL =
       "https://docs.google.com/document/d/e/2PACX-1vSNt_ilcXbHngA8w2L-T0JfaXIp5daI2EERM9YTFvM5x99z2mPXed7bci2X0aZsViCZAhACFt2rN7cj/pub?embedded=true";
 
-    // 👇 Calendar in agenda/schedule mode instead of month
+    // Calendar in agenda/schedule mode instead of month
     const CAL_BASE_URL =
       "https://calendar.google.com/calendar/embed?src=453b90c61605e8533f9997458c308e04805aeb36294e4fbe58824119e2eaaba7%40group.calendar.google.com&ctz=America%2FNew_York&mode=AGENDA";
 
