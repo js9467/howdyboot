@@ -66,38 +66,22 @@
     .brand {
       display: flex;
       align-items: center;
-      gap: 0.9rem;
+    }
+
+    .brand-logo-link {
+      display: inline-block;
     }
 
     .brand-logo {
-      border-radius: 16px;
+      border-radius: 20px;
       background: #fff;
-      box-shadow: 0 10px 28px rgba(255, 106, 155, 0.4);
-      padding: 0.3rem;
+      box-shadow: 0 12px 30px rgba(255, 106, 155, 0.45);
+      padding: 0.35rem;
     }
     .brand-logo img {
       display: block;
-      height: 72px;      /* 👈 bigger logo */
+      height: 96px;   /* 👈 bigger logo */
       width: auto;
-    }
-
-    .brand-text {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .brand-main {
-      font-family: "Baloo 2", cursive;
-      font-size: 1.25rem;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: var(--primary);
-    }
-
-    .brand-tag {
-      font-size: 0.85rem;
-      color: var(--secondary);
-      font-weight: 600;
     }
 
     .nav-links {
@@ -244,10 +228,7 @@
       pointer-events: none;
     }
 
-    .hero-card-inner {
-      position: relative;
-      z-index: 1;
-    }
+    .hero-card-inner { position: relative; z-index: 1; }
 
     .hero-card-title {
       font-weight: 700;
@@ -276,9 +257,7 @@
     }
 
     /* Sections */
-    section {
-      margin-top: 2.4rem;
-    }
+    section { margin-top: 2.4rem; }
 
     .section-heading {
       font-size: 1.3rem;
@@ -315,9 +294,11 @@
       display: block;
     }
 
-    .gallery-card {
-      text-align: center;
+    .embed-wrapper.small iframe {
+      min-height: 520px;
     }
+
+    .gallery-card { text-align: center; }
 
     .small-note {
       margin-top: 0.5rem;
@@ -328,12 +309,12 @@
     /* Contact */
     .contact-grid {
       display: grid;
-      grid-template-columns: minmax(0, 2.2fr) minmax(0, 1.8fr);
+      grid-template-columns: minmax(0, 2.1fr) minmax(0, 2fr);
       gap: 1.5rem;
       align-items: flex-start;
     }
 
-    @media (max-width: 800px) {
+    @media (max-width: 900px) {
       .contact-grid { grid-template-columns: minmax(0, 1fr); }
     }
 
@@ -345,6 +326,7 @@
       color: var(--muted);
       text-transform: uppercase;
       letter-spacing: 0.08em;
+      margin-bottom: 0.25rem;
     }
 
     .pill {
@@ -377,14 +359,12 @@
   <header>
     <div class="nav">
       <div class="brand">
-        <div class="brand-logo">
-          <!-- Update src to your real logo path -->
-          <img src="images/howdy-boot-logo.png" alt="The Howdy Boot Line-Dancers logo" />
-        </div>
-        <div class="brand-text">
-          <div class="brand-main">The Howdy Boot Line-Dancers</div>
-          <div class="brand-tag">“Kids Kicking with Kindness”</div>
-        </div>
+        <!-- Logo only, no redundant text -->
+        <a href="#top" class="brand-logo-link" aria-label="The Howdy Boot Line-Dancers">
+          <div class="brand-logo">
+            <img src="images/howdy-boot-logo.png" alt="The Howdy Boot Line-Dancers logo" />
+          </div>
+        </a>
       </div>
       <nav class="nav-links">
         <a href="#about">About</a>
@@ -543,14 +523,19 @@
       </div>
     </section>
 
-    <!-- CONTACT -->
+    <!-- CONTACT + REQUEST FORM -->
     <section id="contact">
-      <h2 class="section-heading" data-content-key="contact_title">Contact &amp; Hosting</h2>
+      <h2 class="section-heading" data-content-key="contact_title">Contact &amp; Request a Visit</h2>
+      <p class="section-subtitle" data-content-key="contact_intro">
+        Use the details below to reach the volunteer instructor, or fill out the form to request a visit from the
+        Howdy Boot Line-Dancers.
+      </p>
 
-      <div class="contact-grid card">
+      <div class="card contact-grid">
+        <!-- Contact info (Sheet-driven) -->
         <div>
           <div class="pill" data-content-key="contact_pill">
-            📍 Volunteer-based in [Your City / Area]
+            📍 Volunteer-based in your local community
           </div>
 
           <p data-content-key="contact_paragraph1">
@@ -561,26 +546,43 @@
             Because everything is volunteer-led, availability can vary—but we do our best to say yes when schedules and
             space allow.
           </p>
-        </div>
 
-        <div>
-          <div class="contact-item">
+          <div class="contact-item" style="margin-top:0.8rem;">
             <div class="contact-label" data-content-key="contact_email_label">Email</div>
-            <a href="mailto:info@howdybootlinedancers.com" data-content-key="contact_email_value">
+            <a
+              href="mailto:info@howdybootlinedancers.com"
+              data-content-key="contact_email_value"
+              data-content-attr="href-text-email"
+            >
               info@howdybootlinedancers.com
             </a>
           </div>
 
           <div class="contact-item" style="margin-top:0.8rem;">
             <div class="contact-label" data-content-key="contact_phone_label">Phone / Text</div>
-            <span data-content-key="contact_phone_value">(919) 555-1001</span>
+            <a
+              href="tel:+19195551001"
+              data-content-key="contact_phone_value"
+              data-content-attr="href-text-tel"
+            >
+              (919) 555-1001
+            </a>
+          </div>
+        </div>
+
+        <!-- Request form -->
+        <div>
+          <div class="contact-label" data-content-key="request_form_label">Request the Dancers</div>
+          <div class="small-note" data-content-key="request_form_intro">
+            Fill out this short form if you’d like to ask about a visit. The instructor will review requests and follow
+            up as availability allows.
           </div>
 
-          <div class="contact-item" style="margin-top:0.8rem;">
-            <div class="contact-label" data-content-key="contact_form_label">Interest Form</div>
-            <span data-content-key="contact_form_note">
-              You can link a simple Google Form here for new families or hosts, if you’d like.
-            </span>
+          <div class="embed-wrapper small" style="margin-top:0.7rem;">
+            <iframe
+              id="requestFormFrame"
+              title="Request the Howdy Boot Line-Dancers"
+            ></iframe>
           </div>
         </div>
       </div>
@@ -602,27 +604,36 @@
     const DOC_BASE_URL =
       "https://docs.google.com/document/d/e/2PACX-1vSNt_ilcXbHngA8w2L-T0JfaXIp5daI2EERM9YTFvM5x99z2mPXed7bci2X0aZsViCZAhACFt2rN7cj/pub?embedded=true";
 
+    // 👇 Calendar in agenda/schedule mode instead of month
     const CAL_BASE_URL =
-      "https://calendar.google.com/calendar/embed?src=453b90c61605e8533f9997458c308e04805aeb36294e4fbe58824119e2eaaba7%40group.calendar.google.com&ctz=America%2FNew_York";
+      "https://calendar.google.com/calendar/embed?src=453b90c61605e8533f9997458c308e04805aeb36294e4fbe58824119e2eaaba7%40group.calendar.google.com&ctz=America%2FNew_York&mode=AGENDA";
+
+    // Google Form embed (use embedded=true)
+    const FORM_BASE_URL =
+      "https://docs.google.com/forms/d/e/1FAIpQLSfIEhMDw1UAejuJvxk04doL1fdBz2dh9MYMFGbkrNpr0n2yfQ/viewform?embedded=true";
 
     // Footer year
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    // Load Doc & Calendar with cache-busting so updates from Google show quickly
+    // Load Doc, Calendar, and Form with cache-busting for browser caches
     function loadEmbeds() {
       const cacheBust = Date.now();
       const docFrame = document.getElementById("docFrame");
       const calFrame = document.getElementById("calendarFrame");
+      const formFrame = document.getElementById("requestFormFrame");
 
       if (docFrame) {
-        docFrame.src = DOC_BASE_URL + "&cb=" + cacheBust;  // 👈 this is your Google Doc
+        docFrame.src = DOC_BASE_URL + "&cb=" + cacheBust;   // Google Doc
       }
       if (calFrame) {
-        calFrame.src = CAL_BASE_URL + "&cb=" + cacheBust;  // 👈 this is your Google Calendar
+        calFrame.src = CAL_BASE_URL + "&cb=" + cacheBust;   // Google Calendar (agenda view)
+      }
+      if (formFrame) {
+        formFrame.src = FORM_BASE_URL + "&cb=" + cacheBust; // Google Form
       }
     }
 
-    // Load text content from Google Sheet
+    // Load text content from Google Sheet (including contact info)
     async function loadSheetContent() {
       if (!SHEET_CSV_URL) return;
 
@@ -645,8 +656,20 @@
 
         document.querySelectorAll("[data-content-key]").forEach(el => {
           const key = el.getAttribute("data-content-key");
-          if (contentMap[key]) {
-            el.innerHTML = contentMap[key];
+          if (!contentMap[key]) return;
+          const value = contentMap[key];
+          const attr = el.getAttribute("data-content-attr");
+
+          // Special handling for contact email/phone where we want to update href too
+          if (attr === "href-text-email") {
+            el.textContent = value;
+            el.setAttribute("href", "mailto:" + value);
+          } else if (attr === "href-text-tel") {
+            el.textContent = value;
+            const digits = value.replace(/[^0-9+]/g, "");
+            el.setAttribute("href", "tel:" + digits);
+          } else {
+            el.innerHTML = value;
           }
         });
       } catch (err) {
@@ -655,7 +678,7 @@
     }
 
     document.addEventListener("DOMContentLoaded", () => {
-      loadEmbeds();       // Hook up Google Doc + Calendar
+      loadEmbeds();       // Hook up Google Doc + Calendar + Form
       loadSheetContent(); // Pull all editable text from the Sheet
     });
   </script>
