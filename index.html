@@ -5,7 +5,7 @@
   <title>The Howdy Boot Line-Dancers</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- Optional Google Font for a fun, clean look -->
+  <!-- Friendly fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600&family=Nunito:wght@400;600&display=swap" rel="stylesheet">
 
   <style>
@@ -22,14 +22,12 @@
       --shadow-soft: 0 12px 30px rgba(0,0,0,0.08);
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
       font-family: "Nunito", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: radial-gradient(circle at top, #ffe9f2 0, var(--bg) 50%);
+      background: radial-gradient(circle at top, #ffe9f2 0, var(--bg) 52%);
       color: var(--text);
     }
 
@@ -37,24 +35,21 @@
       color: var(--primary);
       text-decoration: none;
     }
-    a:hover {
-      text-decoration: underline;
-    }
+    a:hover { text-decoration: underline; }
 
-    /* Layout */
     .page {
       max-width: 1080px;
       margin: 0 auto;
       padding: 0 1.25rem 3rem;
     }
 
-    /* Header & Nav */
+    /* Header / Nav */
     header {
       position: sticky;
       top: 0;
       z-index: 10;
       backdrop-filter: blur(14px);
-      background: rgba(255, 248, 244, 0.9);
+      background: rgba(255, 248, 244, 0.95);
       border-bottom: 1px solid rgba(255, 189, 140, 0.35);
     }
 
@@ -71,25 +66,19 @@
     .brand {
       display: flex;
       align-items: center;
-      gap: 0.75rem;
+      gap: 0.9rem;
     }
 
     .brand-logo {
-      width: 64px;
-      height: 40px;
-      border-radius: 10px;
+      border-radius: 16px;
       background: #fff;
-      box-shadow: 0 6px 16px rgba(255, 106, 155, 0.3);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
+      box-shadow: 0 10px 28px rgba(255, 106, 155, 0.4);
+      padding: 0.3rem;
     }
-
     .brand-logo img {
-      width: 100%;
-      height: auto;
       display: block;
+      height: 72px;      /* 👈 bigger logo */
+      width: auto;
     }
 
     .brand-text {
@@ -99,14 +88,14 @@
 
     .brand-main {
       font-family: "Baloo 2", cursive;
-      font-size: 1.1rem;
+      font-size: 1.25rem;
       letter-spacing: 0.06em;
       text-transform: uppercase;
       color: var(--primary);
     }
 
     .brand-tag {
-      font-size: 0.8rem;
+      font-size: 0.85rem;
       color: var(--secondary);
       font-weight: 600;
     }
@@ -115,6 +104,8 @@
       display: flex;
       gap: 0.4rem;
       font-size: 0.9rem;
+      flex-wrap: wrap;
+      justify-content: flex-end;
     }
 
     .nav-links a {
@@ -131,9 +122,6 @@
       .nav {
         flex-direction: column;
         align-items: flex-start;
-      }
-      .nav-links {
-        flex-wrap: wrap;
       }
     }
 
@@ -167,16 +155,16 @@
 
     .hero h1 {
       font-family: "Baloo 2", cursive;
-      font-size: clamp(2rem, 3.2vw, 2.5rem);
-      margin: 0 0 0.4rem;
+      font-size: clamp(2rem, 3.2vw, 2.6rem);
+      margin: 0 0 0.25rem;
       color: var(--primary);
     }
 
     .hero-subtitle {
-      font-weight: 600;
+      font-weight: 700;
       font-size: 1rem;
       color: var(--secondary);
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.6rem;
     }
 
     .hero p {
@@ -323,11 +311,10 @@
     .embed-wrapper iframe {
       width: 100%;
       border: 0;
-      min-height: 420px;
+      min-height: 500px;
       display: block;
     }
 
-    /* Gallery */
     .gallery-card {
       text-align: center;
     }
@@ -347,14 +334,10 @@
     }
 
     @media (max-width: 800px) {
-      .contact-grid {
-        grid-template-columns: minmax(0, 1fr);
-      }
+      .contact-grid { grid-template-columns: minmax(0, 1fr); }
     }
 
-    .contact-item {
-      font-size: 0.95rem;
-    }
+    .contact-item { font-size: 0.95rem; }
 
     .contact-label {
       font-weight: 700;
@@ -386,9 +369,7 @@
       color: var(--muted);
     }
 
-    footer .page {
-      padding-bottom: 0;
-    }
+    footer .page { padding-bottom: 0; }
   </style>
 </head>
 
@@ -397,7 +378,7 @@
     <div class="nav">
       <div class="brand">
         <div class="brand-logo">
-          <!-- TODO: update src to your real logo path -->
+          <!-- Update src to your real logo path -->
           <img src="images/howdy-boot-logo.png" alt="The Howdy Boot Line-Dancers logo" />
         </div>
         <div class="brand-text">
@@ -420,50 +401,51 @@
     <section class="hero" id="top">
       <div>
         <div class="hero-tagline" data-content-key="hero_tagline">
-          ✨ Boots, beats, and big smiles
+          💖 Volunteer-led line dancing for kids &amp; the community
         </div>
 
         <h1 data-content-key="hero_title">The Howdy Boot Line-Dancers</h1>
 
         <div class="hero-subtitle" data-content-key="hero_subtitle">
-          Kids learning confidence, kindness, and country moves.
+          Kids learning line dancing, kindness, and confidence—one step at a time.
         </div>
 
         <p data-content-key="hero_paragraph">
-          A fun, beginner-friendly line-dancing program for kids. No experience needed—just
-          comfy shoes, a good attitude, and a willingness to try something new.
+          The Howdy Boot Line-Dancers is a volunteer group where kids (mostly little girls) learn fun, age-appropriate
+          line dances and then share joy at nursing homes, community events, and local gatherings. There’s no pressure,
+          no competition—just movement, music, and kindness.
         </p>
 
         <div class="hero-actions">
           <a href="#schedule" class="btn btn-primary" data-content-key="hero_cta_primary">
-            View Classes &amp; Schedule
+            See Classes &amp; Calendar
           </a>
           <a href="#contact" class="btn btn-secondary" data-content-key="hero_cta_secondary">
-            Ask a Question
+            Ask About Joining or Hosting
           </a>
         </div>
 
         <div class="hero-meta" data-content-key="hero_meta">
-          All abilities welcome • Ages and experience vary by class • First-time dancers encouraged
+          100% volunteer-led • Community-focused • Great for kids who are shy, energetic, or anywhere in between
         </div>
       </div>
 
       <div class="hero-card">
         <div class="hero-card-inner">
           <div class="hero-card-title" data-content-key="hero_card_title">
-            What is Howdy Boot?
+            A little kindness in every kick.
           </div>
           <p class="hero-card-line" data-content-key="hero_card_line1">
-            A low-pressure space for kids to move, laugh, and learn basic line dances.
+            Dancers learn simple line dances in a safe, encouraging environment—no experience needed.
           </p>
           <p class="hero-card-line" data-content-key="hero_card_line2">
-            Classes focus on rhythm, listening, and teamwork—not perfection.
+            The group visits nursing homes, community events, and local programs to spread smiles and music.
           </p>
           <p class="hero-card-line" data-content-key="hero_card_line3">
-            Parents are welcome to watch, cheer, and see their kids shine.
+            Instructors volunteer their time so families can focus on showing up, not signing contracts.
           </p>
           <div class="hero-card-tag" data-content-key="hero_card_tag">
-            💖 Kindness, confidence, and a whole lot of y’all.
+            🤠 “Kids Kicking with Kindness” in every step.
           </div>
         </div>
       </div>
@@ -471,42 +453,42 @@
 
     <!-- ABOUT -->
     <section id="about">
-      <h2 class="section-heading" data-content-key="about_title">About the Program</h2>
+      <h2 class="section-heading" data-content-key="about_title">About the Group</h2>
       <p class="section-subtitle" data-content-key="about_subtitle">
-        We believe every child deserves a place to move their body, build friendships, and feel proud of what they learn.
+        A simple idea: teach kids a few fun line dances, then go brighten someone else’s day.
       </p>
 
       <div class="card">
         <p data-content-key="about_paragraph1">
-          The Howdy Boot Line-Dancers introduce kids to simple, upbeat line dances set to country and kid-friendly music.
-          We focus on kindness, encouragement, and celebrating effort.
+          The Howdy Boot Line-Dancers is a volunteer-led group where an instructor donates time to teach kids the basics
+          of line dancing. Most dancers are elementary-age girls, but all kids are welcome as space allows.
         </p>
         <p data-content-key="about_paragraph2">
-          Dancers learn at their own pace, with clear, step-by-step instruction and plenty of chances to repeat moves.
-          No partner is required, and no prior dance experience is needed.
+          Practices are relaxed, kid-paced, and focused on listening, teamwork, and respect. Dancers learn that effort
+          matters more than perfection, and that a friendly smile can be the best part of the performance.
         </p>
         <p data-content-key="about_paragraph3">
-          Our motto, “Kids Kicking with Kindness,” reminds us that the most important steps are the ones that help others
-          feel welcome and included.
+          Once kids feel comfortable with a few routines, the group visits nursing homes and community events to share a
+          short, upbeat show. It’s a gentle way for kids to practice being brave, kind, and outward-focused.
         </p>
       </div>
     </section>
 
     <!-- SCHEDULE / CALENDAR -->
     <section id="schedule">
-      <h2 class="section-heading" data-content-key="schedule_title">Classes &amp; Schedule</h2>
+      <h2 class="section-heading" data-content-key="schedule_title">Practices &amp; Events</h2>
       <p class="section-subtitle" data-content-key="schedule_subtitle">
-        Weekly classes, special events, and workshops are kept up to date in the calendar below.
+        Practices, outreach visits, and special events are kept up to date in the calendar below.
       </p>
 
       <div class="card">
         <p data-content-key="schedule_intro">
-          Class times and offerings may change during the season. Always check the calendar for the most current
-          information about dates, times, and cancellations.
+          Because the group is volunteer-based, times and locations can change with seasons and school schedules. The
+          calendar shows the most current plan for practices and performances.
         </p>
 
         <div class="embed-wrapper">
-          <!-- Calendar iframe is set via JS for automatic cache-busting -->
+          <!-- Calendar is loaded via JS with cache-busting so updates appear quickly -->
           <iframe id="calendarFrame" title="Howdy Boot Calendar"></iframe>
         </div>
       </div>
@@ -514,15 +496,15 @@
 
     <!-- GALLERY -->
     <section id="gallery">
-      <h2 class="section-heading" data-content-key="gallery_title">Photo Gallery</h2>
+      <h2 class="section-heading" data-content-key="gallery_title">Photos</h2>
       <p class="section-subtitle" data-content-key="gallery_subtitle">
-        We use a shared Google Photos album so pictures can be added easily throughout the year.
+        A peek at practices, performances, and the smiles shared along the way.
       </p>
 
       <div class="card gallery-card">
         <p data-content-key="gallery_body">
-          Click the button below to open our gallery in a new tab. New photos will appear there whenever they’re added—no
-          website changes needed.
+          We keep our photos in a Google Photos album so it’s easy to add new pictures after each practice or event.
+          Click the button below to open the album in a new tab.
         </p>
 
         <a
@@ -535,26 +517,27 @@
         </a>
 
         <div class="small-note">
-          Photos are hosted on Google Photos for easy updating.
+          Photos are hosted on Google Photos for simple, volunteer-friendly updates.
         </div>
       </div>
     </section>
 
     <!-- INFO SHEET / DOC -->
     <section id="info">
-      <h2 class="section-heading" data-content-key="info_title">Details, Policies &amp; What to Expect</h2>
+      <h2 class="section-heading" data-content-key="info_title">Details &amp; Info Sheet</h2>
       <p class="section-subtitle" data-content-key="info_subtitle">
-        The full information sheet below covers what to wear, how to register, payment options, and more.
+        The full info sheet below is maintained by the volunteer instructor and covers what families need to know.
       </p>
 
       <div class="card">
         <p data-content-key="info_intro">
-          This document is updated by the instructor. Any time you see a change there, it will also be reflected here on
-          the website.
+          This document may include what to wear, how to sign up, cost or donation information (if any), expectations
+          for dancers, and how outreach visits work. When the instructor updates it in Google Docs, this page will
+          reflect the newest version.
         </p>
 
         <div class="embed-wrapper">
-          <!-- Doc iframe is set via JS for automatic cache-busting -->
+          <!-- This iframe is filled with your Google Doc URL via JS so it always pulls fresh content -->
           <iframe id="docFrame" title="Howdy Boot Info Sheet"></iframe>
         </div>
       </div>
@@ -562,21 +545,21 @@
 
     <!-- CONTACT -->
     <section id="contact">
-      <h2 class="section-heading" data-content-key="contact_title">Contact &amp; Location</h2>
+      <h2 class="section-heading" data-content-key="contact_title">Contact &amp; Hosting</h2>
 
       <div class="contact-grid card">
         <div>
           <div class="pill" data-content-key="contact_pill">
-            📍 Classes held in [Your City / Studio or School Name]
+            📍 Volunteer-based in [Your City / Area]
           </div>
 
           <p data-content-key="contact_paragraph1">
-            Have questions about classes, ages, or skill levels? Send a message or text and we’ll be happy to help you
-            find the right spot.
+            Interested in having the Howdy Boot Line-Dancers visit your nursing home, church event, or community
+            program? Reach out with a few details and we’ll see what might be possible.
           </p>
           <p data-content-key="contact_paragraph2">
-            Please note that classes may follow local school or community schedules for holidays and weather-related
-            closures.
+            Because everything is volunteer-led, availability can vary—but we do our best to say yes when schedules and
+            space allow.
           </p>
         </div>
 
@@ -596,7 +579,7 @@
           <div class="contact-item" style="margin-top:0.8rem;">
             <div class="contact-label" data-content-key="contact_form_label">Interest Form</div>
             <span data-content-key="contact_form_note">
-              Prefer a form? Add a simple Google Form link here from the sheet, or leave this as-is.
+              You can link a simple Google Form here for new families or hosts, if you’d like.
             </span>
           </div>
         </div>
@@ -605,9 +588,9 @@
   </main>
 
   <footer>
-    <div class="page" style="padding-top:0;">
+    <div class="page" style="padding-bottom:0;">
       <span>© <span id="year"></span> The Howdy Boot Line-Dancers.</span>
-      &nbsp;<span data-content-key="footer_text">“Kids Kicking with Kindness.”</span>
+      &nbsp;<span data-content-key="footer_text">A volunteer group of “Kids Kicking with Kindness.”</span>
     </div>
   </footer>
 
@@ -622,24 +605,24 @@
     const CAL_BASE_URL =
       "https://calendar.google.com/calendar/embed?src=453b90c61605e8533f9997458c308e04805aeb36294e4fbe58824119e2eaaba7%40group.calendar.google.com&ctz=America%2FNew_York";
 
-    // ---------- Footer year ----------
+    // Footer year
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    // ---------- Load Doc & Calendar with cache-busting ----------
+    // Load Doc & Calendar with cache-busting so updates from Google show quickly
     function loadEmbeds() {
       const cacheBust = Date.now();
       const docFrame = document.getElementById("docFrame");
       const calFrame = document.getElementById("calendarFrame");
 
       if (docFrame) {
-        docFrame.src = DOC_BASE_URL + "&cb=" + cacheBust;
+        docFrame.src = DOC_BASE_URL + "&cb=" + cacheBust;  // 👈 this is your Google Doc
       }
       if (calFrame) {
-        calFrame.src = CAL_BASE_URL + "&cb=" + cacheBust;
+        calFrame.src = CAL_BASE_URL + "&cb=" + cacheBust;  // 👈 this is your Google Calendar
       }
     }
 
-    // ---------- Load text content from Google Sheet ----------
+    // Load text content from Google Sheet
     async function loadSheetContent() {
       if (!SHEET_CSV_URL) return;
 
@@ -672,8 +655,8 @@
     }
 
     document.addEventListener("DOMContentLoaded", () => {
-      loadEmbeds();
-      loadSheetContent();
+      loadEmbeds();       // Hook up Google Doc + Calendar
+      loadSheetContent(); // Pull all editable text from the Sheet
     });
   </script>
 </body>
