@@ -2,269 +2,679 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Howdy Boot Line Dancers</title>
+  <title>The Howdy Boot Line-Dancers</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Optional Google Font for a fun, clean look -->
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600&family=Nunito:wght@400;600&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --bg: #faf7f0;
-      --primary: #7b3f00;
-      --accent: #c97b2e;
-      --text: #333333;
-      --muted: #777777;
+      --bg: #fff9f5;
+      --primary: #ff5b87;   /* pink from logo */
+      --secondary: #ffb230; /* golden yellow from logo */
+      --text: #402b3a;
+      --muted: #8b6f7f;
       --card: #ffffff;
-      --border: #e0dcd4;
-      --radius: 16px;
-      --shadow: 0 10px 25px rgba(0,0,0,0.06);
+      --border: #f1d9c9;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --shadow-soft: 0 12px 30px rgba(0,0,0,0.08);
     }
 
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
 
     body {
       margin: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-family: "Nunito", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #ffe9f2 0, var(--bg) 50%);
       color: var(--text);
-      background: var(--bg);
     }
 
-    header {
-      background: #fff;
-      border-bottom: 1px solid #ddd;
-      padding: 1.25rem;
-    }
-
-    .container {
-      max-width: 960px;
-      width: 100%;
-      margin: 0 auto;
-      padding: 0 1.25rem;
-    }
-
-    h1, h2, h3 {
+    a {
       color: var(--primary);
-      margin-top: 0;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
     }
 
-    section {
-      padding: 2rem 0;
-      border-bottom: 1px solid #eee;
+    /* Layout */
+    .page {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 1.25rem 3rem;
     }
 
-    iframe {
+    /* Header & Nav */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(14px);
+      background: rgba(255, 248, 244, 0.9);
+      border-bottom: 1px solid rgba(255, 189, 140, 0.35);
+    }
+
+    .nav {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0.6rem 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .brand-logo {
+      width: 64px;
+      height: 40px;
+      border-radius: 10px;
+      background: #fff;
+      box-shadow: 0 6px 16px rgba(255, 106, 155, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .brand-logo img {
       width: 100%;
-      border: 0;
-      min-height: 350px;
+      height: auto;
+      display: block;
     }
 
-    .card {
-      background: var(--card);
-      border-radius: var(--radius);
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow);
-      padding: 1.5rem;
+    .brand-text {
+      display: flex;
+      flex-direction: column;
     }
 
-    .footer {
-      padding: 2rem 1.25rem;
-      text-align: center;
+    .brand-main {
+      font-family: "Baloo 2", cursive;
+      font-size: 1.1rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--primary);
+    }
+
+    .brand-tag {
       font-size: 0.8rem;
-      color: var(--muted);
+      color: var(--secondary);
+      font-weight: 600;
     }
 
-    .gallery-card {
-      margin-top: 1rem;
-      text-align: center;
+    .nav-links {
+      display: flex;
+      gap: 0.4rem;
+      font-size: 0.9rem;
+    }
+
+    .nav-links a {
+      padding: 0.35rem 0.7rem;
+      border-radius: 999px;
+      color: var(--text);
+    }
+    .nav-links a:hover {
+      background: rgba(255, 91, 135, 0.08);
+      text-decoration: none;
+    }
+
+    @media (max-width: 720px) {
+      .nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .nav-links {
+        flex-wrap: wrap;
+      }
+    }
+
+    /* Hero */
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2.2fr);
+      gap: 2rem;
+      padding-top: 2rem;
+      align-items: center;
+    }
+
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .hero-tagline {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.25rem 0.8rem;
+      border-radius: 999px;
+      background: #fff1f7;
+      border: 1px dashed rgba(255, 178, 48, 0.7);
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 0.75rem;
+    }
+
+    .hero h1 {
+      font-family: "Baloo 2", cursive;
+      font-size: clamp(2rem, 3.2vw, 2.5rem);
+      margin: 0 0 0.4rem;
+      color: var(--primary);
+    }
+
+    .hero-subtitle {
+      font-weight: 600;
+      font-size: 1rem;
+      color: var(--secondary);
+      margin-bottom: 0.5rem;
+    }
+
+    .hero p {
+      margin-top: 0.35rem;
+      max-width: 32rem;
+      color: var(--muted);
+      font-size: 0.98rem;
+    }
+
+    .hero-actions {
+      margin-top: 1.1rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      align-items: center;
     }
 
     .btn {
-      display: inline-block;
-      padding: 0.7rem 1.4rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.6rem 1.3rem;
       border-radius: 999px;
-      text-decoration: none;
-      font-weight: 500;
-      font-size: 0.95rem;
       border: 1px solid transparent;
+      font-size: 0.92rem;
+      font-weight: 600;
       cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.08s ease, box-shadow 0.08s ease, background 0.1s;
     }
 
     .btn-primary {
-      background: var(--primary);
+      background: linear-gradient(135deg, var(--primary), #ff7da3);
       color: #fff;
-      border-color: var(--primary);
+      box-shadow: 0 10px 22px rgba(255, 91, 135, 0.4);
+    }
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 12px 28px rgba(255, 91, 135, 0.5);
+      text-decoration: none;
     }
 
-    .btn-primary:hover {
-      filter: brightness(1.07);
+    .btn-secondary {
+      background: #fff;
+      color: var(--primary);
+      border-color: rgba(255, 178, 48, 0.8);
+    }
+    .btn-secondary:hover {
+      background: #fff6ea;
+      text-decoration: none;
+    }
+
+    .hero-meta {
+      margin-top: 0.6rem;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .hero-card {
+      background: #fff;
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(255, 178, 48, 0.45);
+      box-shadow: var(--shadow-soft);
+      padding: 1.1rem 1.2rem 1.3rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle at 15% 20%, rgba(255, 240, 191, 0.9) 0, transparent 55%),
+        radial-gradient(circle at 80% 80%, rgba(255, 199, 228, 0.9) 0, transparent 50%);
+      opacity: 0.7;
+      pointer-events: none;
+    }
+
+    .hero-card-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-card-title {
+      font-weight: 700;
+      font-size: 1rem;
+      margin-bottom: 0.25rem;
+      color: var(--primary);
+    }
+
+    .hero-card-line {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin: 0.15rem 0;
+    }
+
+    .hero-card-tag {
+      margin-top: 0.7rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      padding: 0.2rem 0.7rem;
+      border-radius: 999px;
+      background: rgba(255, 91, 135, 0.08);
+      color: var(--primary);
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+
+    /* Sections */
+    section {
+      margin-top: 2.4rem;
+    }
+
+    .section-heading {
+      font-size: 1.3rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .section-subtitle {
+      font-size: 0.9rem;
+      color: var(--muted);
+      max-width: 32rem;
+    }
+
+    .card {
+      margin-top: 1rem;
+      background: var(--card);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-soft);
+      padding: 1.4rem 1.4rem 1.6rem;
+    }
+
+    .embed-wrapper {
+      margin-top: 0.85rem;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid #f0e0d6;
+      background: #fffdf9;
+    }
+
+    .embed-wrapper iframe {
+      width: 100%;
+      border: 0;
+      min-height: 420px;
+      display: block;
+    }
+
+    /* Gallery */
+    .gallery-card {
+      text-align: center;
     }
 
     .small-note {
-      margin-top: 0.7rem;
+      margin-top: 0.5rem;
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    /* Contact */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 2.2fr) minmax(0, 1.8fr);
+      gap: 1.5rem;
+      align-items: flex-start;
+    }
+
+    @media (max-width: 800px) {
+      .contact-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .contact-item {
+      font-size: 0.95rem;
+    }
+
+    .contact-label {
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.25rem 0.8rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 178, 48, 0.5);
+      font-size: 0.8rem;
+      color: var(--secondary);
+      background: #fff7e8;
+      margin-bottom: 0.6rem;
+    }
+
+    footer {
+      border-top: 1px solid rgba(255, 189, 140, 0.4);
+      background: #fff5ec;
+      margin-top: 2.5rem;
+      padding: 1.2rem 1.25rem 1.8rem;
       font-size: 0.8rem;
       color: var(--muted);
     }
-  </style>
 
+    footer .page {
+      padding-bottom: 0;
+    }
+  </style>
 </head>
 
 <body>
-
-<header>
-  <div class="container">
-    <h1 data-content-key="hero_title">Howdy Boot Line Dancers</h1>
-    <p data-content-key="hero_subtitle">Learn, laugh, and line dance!</p>
-  </div>
-</header>
-
-<div class="container">
-
-  <!-- ABOUT SECTION -->
-  <section>
-    <h2 data-content-key="about_title">About Us</h2>
-
-    <p data-content-key="about_paragraph">
-      Welcome! We love line dancing and want YOU to feel welcome.
-    </p>
-
-    <h3 data-content-key="general_info_heading">General Information &amp; Announcements</h3>
-
-    <div class="card">
-      <!-- GOOGLE DOC EMBED -->
-      <iframe src="https://docs.google.com/document/d/e/2PACX-1vSNt_ilcXbHngA8w2L-T0JfaXIp5daI2EERM9YTFvM5x99z2mPXed7bci2X0aZsViCZAhACFt2rN7cj/pub?embedded=true"></iframe>
+  <header>
+    <div class="nav">
+      <div class="brand">
+        <div class="brand-logo">
+          <!-- TODO: update src to your real logo path -->
+          <img src="images/howdy-boot-logo.png" alt="The Howdy Boot Line-Dancers logo" />
+        </div>
+        <div class="brand-text">
+          <div class="brand-main">The Howdy Boot Line-Dancers</div>
+          <div class="brand-tag">“Kids Kicking with Kindness”</div>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a href="#about">About</a>
+        <a href="#schedule">Classes &amp; Calendar</a>
+        <a href="#gallery">Photos</a>
+        <a href="#info">Info Sheet</a>
+        <a href="#contact">Contact</a>
+      </nav>
     </div>
-  </section>
+  </header>
 
-  <!-- SCHEDULE SECTION -->
-  <section>
-    <h2 data-content-key="schedule_title">Schedule</h2>
+  <main class="page">
+    <!-- HERO -->
+    <section class="hero" id="top">
+      <div>
+        <div class="hero-tagline" data-content-key="hero_tagline">
+          ✨ Boots, beats, and big smiles
+        </div>
 
-    <p data-content-key="schedule_description">
-      Weekly classes and events are listed in the calendar below.
-    </p>
+        <h1 data-content-key="hero_title">The Howdy Boot Line-Dancers</h1>
 
-    <div class="card">
-      <!-- CALENDAR EMBED -->
-      <iframe
-        src="https://calendar.google.com/calendar/embed?src=453b90c61605e8533f9997458c308e04805aeb36294e4fbe58824119e2eaaba7%40group.calendar.google.com&ctz=America%2FNew_York"
-        style="border:0;"
-        frameborder="0"
-        scrolling="no">
-      </iframe>
-    </div>
-  </section>
+        <div class="hero-subtitle" data-content-key="hero_subtitle">
+          Kids learning confidence, kindness, and country moves.
+        </div>
 
-  <!-- GALLERY SECTION -->
-  <section>
-    <h2 data-content-key="gallery_title">Photo Gallery</h2>
+        <p data-content-key="hero_paragraph">
+          A fun, beginner-friendly line-dancing program for kids. No experience needed—just
+          comfy shoes, a good attitude, and a willingness to try something new.
+        </p>
 
-    <p data-content-key="gallery_description">
-      We keep our photos in a Google Photos album so it’s easy to update.
-    </p>
+        <div class="hero-actions">
+          <a href="#schedule" class="btn btn-primary" data-content-key="hero_cta_primary">
+            View Classes &amp; Schedule
+          </a>
+          <a href="#contact" class="btn btn-secondary" data-content-key="hero_cta_secondary">
+            Ask a Question
+          </a>
+        </div>
 
-    <div class="card gallery-card">
-      <p class="small-note" data-content-key="gallery_body">
-        Click the button below to open the gallery in a new tab. New pictures will appear there as they’re added.
+        <div class="hero-meta" data-content-key="hero_meta">
+          All abilities welcome • Ages and experience vary by class • First-time dancers encouraged
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <div class="hero-card-inner">
+          <div class="hero-card-title" data-content-key="hero_card_title">
+            What is Howdy Boot?
+          </div>
+          <p class="hero-card-line" data-content-key="hero_card_line1">
+            A low-pressure space for kids to move, laugh, and learn basic line dances.
+          </p>
+          <p class="hero-card-line" data-content-key="hero_card_line2">
+            Classes focus on rhythm, listening, and teamwork—not perfection.
+          </p>
+          <p class="hero-card-line" data-content-key="hero_card_line3">
+            Parents are welcome to watch, cheer, and see their kids shine.
+          </p>
+          <div class="hero-card-tag" data-content-key="hero_card_tag">
+            💖 Kindness, confidence, and a whole lot of y’all.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <h2 class="section-heading" data-content-key="about_title">About the Program</h2>
+      <p class="section-subtitle" data-content-key="about_subtitle">
+        We believe every child deserves a place to move their body, build friendships, and feel proud of what they learn.
       </p>
 
-      <!-- PUBLIC GOOGLE PHOTOS LINK -->
-      <a
-        href="https://photos.app.goo.gl/32WDAnZHoStuUCfs6"
-        target="_blank"
-        rel="noreferrer"
-        class="btn btn-primary">
-        View Photo Gallery
-      </a>
+      <div class="card">
+        <p data-content-key="about_paragraph1">
+          The Howdy Boot Line-Dancers introduce kids to simple, upbeat line dances set to country and kid-friendly music.
+          We focus on kindness, encouragement, and celebrating effort.
+        </p>
+        <p data-content-key="about_paragraph2">
+          Dancers learn at their own pace, with clear, step-by-step instruction and plenty of chances to repeat moves.
+          No partner is required, and no prior dance experience is needed.
+        </p>
+        <p data-content-key="about_paragraph3">
+          Our motto, “Kids Kicking with Kindness,” reminds us that the most important steps are the ones that help others
+          feel welcome and included.
+        </p>
+      </div>
+    </section>
 
-      <p class="small-note">Opens in a new tab.</p>
-    </div>
-  </section>
-
-  <!-- (OPTIONAL) EVENTS LIST – framework only, see explanation below -->
-  <section>
-    <h2 data-content-key="events_title">Events</h2>
-    <p data-content-key="events_intro">
-      Here are a few of our special events. Each one can link to its own photo album or info page.
-    </p>
-
-    <div class="card">
-      <h3 data-content-key="event1_title">Spring Social</h3>
-      <p class="small-note" data-content-key="event1_date">
-        March 23 • 7:00–10:00 PM
+    <!-- SCHEDULE / CALENDAR -->
+    <section id="schedule">
+      <h2 class="section-heading" data-content-key="schedule_title">Classes &amp; Schedule</h2>
+      <p class="section-subtitle" data-content-key="schedule_subtitle">
+        Weekly classes, special events, and workshops are kept up to date in the calendar below.
       </p>
-      <p data-content-key="event1_description">
-        A casual night of dancing, snacks, and fun. Great for inviting friends!
+
+      <div class="card">
+        <p data-content-key="schedule_intro">
+          Class times and offerings may change during the season. Always check the calendar for the most current
+          information about dates, times, and cancellations.
+        </p>
+
+        <div class="embed-wrapper">
+          <!-- Calendar iframe is set via JS for automatic cache-busting -->
+          <iframe id="calendarFrame" title="Howdy Boot Calendar"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section id="gallery">
+      <h2 class="section-heading" data-content-key="gallery_title">Photo Gallery</h2>
+      <p class="section-subtitle" data-content-key="gallery_subtitle">
+        We use a shared Google Photos album so pictures can be added easily throughout the year.
       </p>
-      <!-- For now this can point to the main album or a future per-event album -->
-      <a
-        href="https://photos.app.goo.gl/32WDAnZHoStuUCfs6"
-        target="_blank"
-        rel="noreferrer"
-        class="btn btn-primary">
-        View Photos
-      </a>
+
+      <div class="card gallery-card">
+        <p data-content-key="gallery_body">
+          Click the button below to open our gallery in a new tab. New photos will appear there whenever they’re added—no
+          website changes needed.
+        </p>
+
+        <a
+          href="https://photos.app.goo.gl/32WDAnZHoStuUCfs6"
+          target="_blank"
+          rel="noreferrer"
+          class="btn btn-primary"
+        >
+          View Photo Gallery
+        </a>
+
+        <div class="small-note">
+          Photos are hosted on Google Photos for easy updating.
+        </div>
+      </div>
+    </section>
+
+    <!-- INFO SHEET / DOC -->
+    <section id="info">
+      <h2 class="section-heading" data-content-key="info_title">Details, Policies &amp; What to Expect</h2>
+      <p class="section-subtitle" data-content-key="info_subtitle">
+        The full information sheet below covers what to wear, how to register, payment options, and more.
+      </p>
+
+      <div class="card">
+        <p data-content-key="info_intro">
+          This document is updated by the instructor. Any time you see a change there, it will also be reflected here on
+          the website.
+        </p>
+
+        <div class="embed-wrapper">
+          <!-- Doc iframe is set via JS for automatic cache-busting -->
+          <iframe id="docFrame" title="Howdy Boot Info Sheet"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <h2 class="section-heading" data-content-key="contact_title">Contact &amp; Location</h2>
+
+      <div class="contact-grid card">
+        <div>
+          <div class="pill" data-content-key="contact_pill">
+            📍 Classes held in [Your City / Studio or School Name]
+          </div>
+
+          <p data-content-key="contact_paragraph1">
+            Have questions about classes, ages, or skill levels? Send a message or text and we’ll be happy to help you
+            find the right spot.
+          </p>
+          <p data-content-key="contact_paragraph2">
+            Please note that classes may follow local school or community schedules for holidays and weather-related
+            closures.
+          </p>
+        </div>
+
+        <div>
+          <div class="contact-item">
+            <div class="contact-label" data-content-key="contact_email_label">Email</div>
+            <a href="mailto:info@howdybootlinedancers.com" data-content-key="contact_email_value">
+              info@howdybootlinedancers.com
+            </a>
+          </div>
+
+          <div class="contact-item" style="margin-top:0.8rem;">
+            <div class="contact-label" data-content-key="contact_phone_label">Phone / Text</div>
+            <span data-content-key="contact_phone_value">(919) 555-1001</span>
+          </div>
+
+          <div class="contact-item" style="margin-top:0.8rem;">
+            <div class="contact-label" data-content-key="contact_form_label">Interest Form</div>
+            <span data-content-key="contact_form_note">
+              Prefer a form? Add a simple Google Form link here from the sheet, or leave this as-is.
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="page" style="padding-top:0;">
+      <span>© <span id="year"></span> The Howdy Boot Line-Dancers.</span>
+      &nbsp;<span data-content-key="footer_text">“Kids Kicking with Kindness.”</span>
     </div>
+  </footer>
 
-  </section>
+  <script>
+    // ---------- CONFIG: Google URLs ----------
+    const SHEET_CSV_URL =
+      "https://docs.google.com/spreadsheets/d/e/2PACX-1vSEzDs7LVp6yxuIwme97jEC9akDHKNlmaiH3fmyWMkqlay-CjDa84ElNe0QPUD1LVmuBm4hHGGGlnnF/pub?output=csv";
 
-  <!-- CONTACT SECTION -->
-  <section>
-    <h2 data-content-key="contact_title">Contact</h2>
+    const DOC_BASE_URL =
+      "https://docs.google.com/document/d/e/2PACX-1vSNt_ilcXbHngA8w2L-T0JfaXIp5daI2EERM9YTFvM5x99z2mPXed7bci2X0aZsViCZAhACFt2rN7cj/pub?embedded=true";
 
-    <p><strong>Email:</strong>
-      <a href="mailto:info@howdybootlinedancers.com" data-content-key="contact_email">
-        info@howdybootlinedancers.com
-      </a>
-    </p>
+    const CAL_BASE_URL =
+      "https://calendar.google.com/calendar/embed?src=453b90c61605e8533f9997458c308e04805aeb36294e4fbe58824119e2eaaba7%40group.calendar.google.com&ctz=America%2FNew_York";
 
-    <p><strong>Phone:</strong>
-      <span data-content-key="contact_phone">(919) 555-1001</span>
-    </p>
+    // ---------- Footer year ----------
+    document.getElementById("year").textContent = new Date().getFullYear();
 
-    <p data-content-key="contact_footer">We look forward to dancing with you!</p>
-  </section>
+    // ---------- Load Doc & Calendar with cache-busting ----------
+    function loadEmbeds() {
+      const cacheBust = Date.now();
+      const docFrame = document.getElementById("docFrame");
+      const calFrame = document.getElementById("calendarFrame");
 
-</div>
-
-<footer class="footer">
-  © <span id="year"></span> Howdy Boot Line Dancers
-</footer>
-
-<script>
-  document.getElementById('year').textContent = new Date().getFullYear();
-
-  // GOOGLE SHEET (CMS)
-  const SHEET_URL =
-    "https://docs.google.com/spreadsheets/d/e/2PACX-1vSEzDs7LVp6yxuIwme97jEC9akDHKNlmaiH3fmyWMkqlay-CjDa84ElNe0QPUD1LVmuBm4hHGGGlnnF/pub?output=csv";
-
-  async function loadContent() {
-    try {
-      const res = await fetch(SHEET_URL);
-      const csv = await res.text();
-      const rows = csv.split("\n").filter(x => x.trim());
-
-      let start = rows[0].toLowerCase().startsWith("key") ? 1 : 0;
-      const map = {};
-
-      for (let i = start; i < rows.length; i++) {
-        const [rawKey, ...rest] = rows[i].split(",");
-        const key = (rawKey || "").trim();
-        const value = rest.join(",").trim();
-        if (key) map[key] = value;
+      if (docFrame) {
+        docFrame.src = DOC_BASE_URL + "&cb=" + cacheBust;
       }
-
-      document.querySelectorAll("[data-content-key]").forEach(el => {
-        const key = el.dataset.contentKey;
-        if (map[key]) {
-          el.innerHTML = map[key];
-        }
-      });
-
-    } catch (e) {
-      console.log("Failed to pull Google Sheet. Using fallback text.", e);
+      if (calFrame) {
+        calFrame.src = CAL_BASE_URL + "&cb=" + cacheBust;
+      }
     }
-  }
 
-  loadContent();
-</script>
+    // ---------- Load text content from Google Sheet ----------
+    async function loadSheetContent() {
+      if (!SHEET_CSV_URL) return;
 
+      try {
+        const res = await fetch(SHEET_CSV_URL);
+        if (!res.ok) throw new Error("Failed to fetch sheet");
+        const csvText = await res.text();
+
+        const lines = csvText.split("\n").map(l => l.trim()).filter(Boolean);
+        const contentMap = {};
+        const startIndex = lines[0].toLowerCase().startsWith("key,") ? 1 : 0;
+
+        for (let i = startIndex; i < lines.length; i++) {
+          const raw = lines[i];
+          const [rawKey, ...rest] = raw.split(",");
+          const key = (rawKey || "").trim();
+          const value = rest.join(",").trim();
+          if (key) contentMap[key] = value;
+        }
+
+        document.querySelectorAll("[data-content-key]").forEach(el => {
+          const key = el.getAttribute("data-content-key");
+          if (contentMap[key]) {
+            el.innerHTML = contentMap[key];
+          }
+        });
+      } catch (err) {
+        console.error("Error loading sheet content:", err);
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      loadEmbeds();
+      loadSheetContent();
+    });
+  </script>
 </body>
 </html>
