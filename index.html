@@ -4,10 +4,11 @@
   <meta charset="UTF-8" />
   <title>Howdy Boot Line Dancers</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <style>
     body {
       margin:0;
-      font-family: sans-serif;
+      font-family:sans-serif;
       color:#333;
       background:#faf7f0;
     }
@@ -17,17 +18,17 @@
       padding:1.25rem;
     }
     .container {
-      width:100%;
       max-width:900px;
-      margin: auto;
-    }
-    h1 {
-      margin-top:0;
-      color:#7b3f00;
+      width:100%;
+      margin:auto;
     }
     section {
       padding:2rem 0;
       border-bottom:1px solid #eee;
+    }
+    h1,h2,h3 {
+      color:#7b3f00;
+      margin-top:0;
     }
     iframe {
       width:100%;
@@ -41,6 +42,7 @@
       color:#777;
     }
   </style>
+
 </head>
 
 <body>
@@ -48,64 +50,81 @@
 <header>
   <div class="container">
     <h1 data-content-key="hero_title">Howdy Boot Line Dancers</h1>
-    <p data-content-key="hero_subtitle">Learn, laugh, line dance!</p>
+    <p data-content-key="hero_subtitle">Learn, laugh, and line dance!</p>
   </div>
 </header>
 
+
 <div class="container">
 
-  <!-- About Section -->
+  <!-- ABOUT SECTION -->
   <section>
     <h2 data-content-key="about_title">About Us</h2>
+
     <p data-content-key="about_paragraph">
       Welcome! We love line dancing and want YOU to feel welcome.
     </p>
 
-    <h3>General Info / Announcements</h3>
+    <h3 data-content-key="general_info_heading">General Information & Announcements</h3>
 
-    <!-- Embedded DOC -->
+    <!-- GOOGLE DOC EMBED -->
     <iframe src="https://docs.google.com/document/d/e/2PACX-1vSNt_ilcXbHngA8w2L-T0JfaXIp5daI2EERM9YTFvM5x99z2mPXed7bci2X0aZsViCZAhACFt2rN7cj/pub?embedded=true"></iframe>
   </section>
 
 
-  <!-- Schedule Section -->
+  <!-- SCHEDULE SECTION -->
   <section>
     <h2 data-content-key="schedule_title">Schedule</h2>
+
     <p data-content-key="schedule_description">
-       Weekly classes & group events shown below.
+       Weekly classes and events are listed below. Please check back often!
     </p>
 
-    <!-- Your DOC is already handling some schedule info,
-         so no calendar is required—but you CAN add one later. -->
+    <!-- CALENDAR EMBED -->
+    <iframe 
+      src="https://calendar.google.com/calendar/embed?src=453b90c61605e8533f9997458c308e04805aeb36294e4fbe58824119e2eaaba7%40group.calendar.google.com&ctz=America%2FNew_York" 
+      style="border:0;" 
+      frameborder="0" 
+      scrolling="no">
+    </iframe>
 
   </section>
 
 
-  <!-- Gallery Section -->
+  <!-- GALLERY SECTION -->
   <section>
-    <h2 data-content-key="gallery_title">Pictures & Gallery</h2>
+    <h2 data-content-key="gallery_title">Photo Gallery</h2>
+
     <p data-content-key="gallery_description">
-      Photos update automatically when added to album.
+      Add photos to the album, and they will appear here automatically.
     </p>
 
-    <!-- Google Photos Album -->
-    <iframe src="https://photos.app.goo.gl/32WDAnZHoStuUCfs6"></iframe>
+    <!-- GOOGLE PHOTOS ALBUM -->
+    <!-- NOTE: Google Photos does not officially support clean iframe embed.
+         Users must click to open album browser view. Still simple to manage. -->
+    <iframe 
+      src="https://photos.app.goo.gl/32WDAnZHoStuUCfs6"
+      style="min-height:400px;">
+    </iframe>
   </section>
 
 
-  <!-- Contact -->
+  <!-- CONTACT SECTION -->
   <section>
     <h2 data-content-key="contact_title">Contact</h2>
 
     <p><strong>Email:</strong>
-      <a href="mailto:info@yourstudio.com" data-content-key="contact_email">info@yourstudio.com</a>
+      <a href="mailto:info@howdybootlinedancers.com" data-content-key="contact_email">
+        info@howdybootlinedancers.com
+      </a>
     </p>
 
     <p><strong>Phone:</strong>
-      <span data-content-key="contact_phone">555-555-5555</span>
+      <span data-content-key="contact_phone">(919) 555-1001</span>
     </p>
 
     <p data-content-key="contact_footer">We look forward to dancing with you!</p>
+
   </section>
 
 </div>
@@ -117,37 +136,38 @@
 
 
 <script>
-  document.getElementById('year').textContent = new Date().getFullYear();
+document.getElementById('year').textContent = new Date().getFullYear();
 
-  const SHEET_URL =
-   "https://docs.google.com/spreadsheets/d/e/2PACX-1vSEzDs7LVp6yxuIwme97jEC9akDHKNlmaiH3fmyWMkqlay-CjDa84ElNe0QPUD1LVmuBm4hHGGGlnnF/pub?output=csv";
+// GOOGLE SHEET (CMS)
+const SHEET_URL =
+ "https://docs.google.com/spreadsheets/d/e/2PACX-1vSEzDs7LVp6yxuIwme97jEC9akDHKNlmaiH3fmyWMkqlay-CjDa84ElNe0QPUD1LVmuBm4hHGGGlnnF/pub?output=csv";
 
-  async function loadSheet() {
-    try {
-      const res = await fetch(SHEET_URL);
-      const csv = await res.text();
-      const lines = csv.split("\n").filter(x => x.trim());
+async function loadContent() {
+  try {
+    const res = await fetch(SHEET_URL);
+    const csv = await res.text();
+    const rows = csv.split("\n").filter(x=>x.trim());
 
-      let start = 0;
-      if (lines[0].toLowerCase().startsWith("key")) start = 1;
+    let start = rows[0].toLowerCase().startsWith("key") ? 1 : 0;
 
-      const map = {};
-      for (let i=start;i<lines.length;i++){
-        const [k, ...rest] = lines[i].split(",");
-        map[k.trim()] = rest.join(",").trim();
-      }
+    const map = {};
 
-      document.querySelectorAll("[data-content-key]").forEach(el=>{
-        const key = el.dataset.contentKey;
-        if(map[key]) el.innerHTML = map[key];
-      });
-
-    } catch (err) {
-      console.log("Sheet load failed, fallback text used.", err);
+    for(let i=start; i<rows.length; i++){
+      const [k,...rest] = rows[i].split(",");
+      map[k.trim()] = rest.join(",").trim();
     }
-  }
 
-  loadSheet();
+    document.querySelectorAll("[data-content-key]").forEach(el=>{
+      const key = el.dataset.contentKey;
+      if(map[key]) el.innerHTML = map[key];
+    });
+
+  } catch(e){
+    console.log("Failed to pull Google Sheet.", e);
+  }
+}
+
+loadContent();
 </script>
 
 </body>
