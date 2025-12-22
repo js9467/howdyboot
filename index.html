@@ -414,14 +414,13 @@
 
     .event-gallery {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
       gap: 0.5rem;
     }
 
     .event-gallery img {
       width: 100%;
-      height: auto;
-      aspect-ratio: 4 / 3;
+      height: 90px;
       object-fit: cover;
       border-radius: 12px;
       border: 1px solid rgba(0,0,0,0.08);
@@ -466,10 +465,10 @@
       </div>
       <nav class="nav-links">
         <a href="#about">About</a>
-        <a href="#schedule">Classes &amp; Calendar</a>
+        <a href="#schedule">Upcoming Events</a>
         <a href="#past-events">Past Events</a>
         <a href="#gallery">Photos</a>
-        <a href="#info">DD's Notes</a>
+        <a href="#info">Notes from DD</a>
         <a href="#contact">Contact</a>
       </nav>
     </div>
@@ -486,7 +485,7 @@
         <h1 data-content-key="hero_title">The Howdy Boot Line-Dancers</h1>
 
         <div class="hero-subtitle" data-content-key="hero_subtitle">
-          Kids learning line dancing, kindness, and confidence—one step at a time.
+        Learn, laugh, line dance!
         </div>
 
         <p data-content-key="hero_paragraph">
@@ -538,17 +537,22 @@
       </p>
 
       <div class="card">
-        <p data-content-key="about_paragraph1">
-          The Howdy Boot Line-Dancers are a lively new group of young performers spreading joy through country line dancing and kindness!  They have performed for several retirement communities as well as danced in the Wake Forest Cares Holiday Kick-off event.  Their routines are upbeat and full of warm smiles!  They are looking forward to sharing their dancing hearts with many more audiences in the future!</p>
-        <p data-content-key="about_paragraph2">
-          Practices are relaxed, kid-paced, and focused on listening, teamwork, and respect. Dancers learn that effort
-          matters more than perfection, and that a friendly smile can be the best part of the performance.
+        <p data-content-key="about_paragraph1">The Howdy Boot Line-Dancers
+are a lively new volunteer group of young performers spreading joy through country line dancing, smiles and kindness! 
+The Howdy Boot Line-Dancer’s group began with a simple idea rooted in heart and community. 
+We were looking for a fun and meaningful way for kids to give back and spread kindness throughout the community. 
+ Line dancing was already something we personally loved and after holding a line-dancing themed birthday party,, the idea naturally took shape.  The birthday celebration quickly turned into, “Why don’t we make this a little line-dancing group?”  From that moment, The Howdy Boot Line-Dancers were born, bringing kids together to dance, serve others, and share smiles everywhere they go!
+The dancers learn simple, upbeat line dances, then perform for retirement communities, community events and local programs, in order to give back with smiles, music and dancing!  
+
+
+
+<p data-content-key="about_paragraph2">
+        They look forward to continuing to share their dancing hearts with many more audiences in the future!
         </p>
         <p data-content-key="about_paragraph3">
-          Once kids feel comfortable with a few routines, the group visits retirement communitiutes and community events to share a
-          short, upbeat show. It’s a gentle way for kids to practice being brave, kind, and outward-focused.
-        </p>
-        <div class="about-gallery" data-content-key="about_photo_urls" data-content-attr="photo-gallery"></div>
+       <b></b>  Happy Feet!
+Kind Hearts!
+Dancing makes the world a little brighter! </b></p>
       </div>
     </section>
 
@@ -576,25 +580,13 @@
     <section id="past-events">
       <h2 class="section-heading">Past Events</h2>
       <p class="section-subtitle">
-        Highlights from recent visits. Each event pulls a mini gallery from our main Google Photos album—no separate
-        albums needed.
+        Highlights from recent visits. 
       </p>
 
       <div class="card">
         <p>
-          Add new events by dropping photo links into the shared Google Sheet tab for past events. Use a pipe (|)
-          between photo URLs so each event can show a small gallery while still keeping everything in one album.
+       Past Events
         </p>
-        <details class="small-note" style="margin:0.6rem 0 0.9rem;">
-          <summary style="cursor:pointer;font-weight:600;">Admin setup: how to reuse one album for every event</summary>
-          <ol style="margin:0.6rem 0 0 1.1rem; padding:0; display:grid; gap:0.35rem;">
-            <li>Keep one shared Google Photos album. Make sure the album link is shareable (anyone with the link).</li>
-            <li>For each event, open the photo in Google Photos and use “Open image in new tab” (or “Copy image address”)
-              to grab the direct image URL (googleusercontent.com).</li>
-            <li>Paste those direct image URLs into the Sheet’s <strong>photo_urls</strong> column, separated by <code>|</code>.</li>
-            <li>Put the shared album link in <strong>album_url</strong> so the “View the full album” button works.</li>
-          </ol>
-        </details>
         <div id="pastEventsList" class="past-events-grid"></div>
         <div class="small-note" id="pastEventsNote">
           Past event highlights will appear here once the sheet is updated.
@@ -611,8 +603,7 @@
 
       <div class="card gallery-card">
         <p data-content-key="gallery_body">
-          We keep our photos in a Google Photos album so it’s easy to add new pictures after each practice or event.
-          Click the button below to open the album in a new tab.
+    ...
         </p>
 
         <a
@@ -625,7 +616,7 @@
         </a>
 
         <div class="small-note">
-          Photos are hosted on Google Photos for simple, volunteer-friendly updates.
+          ...
         </div>
       </div>
     </section>
