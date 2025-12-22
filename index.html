@@ -366,6 +366,72 @@
     }
 
     footer .page { padding-bottom: 0; }
+
+    /* Past events */
+    .past-events-grid {
+      display: grid;
+      gap: 1.2rem;
+      margin-top: 1.2rem;
+    }
+
+    .past-event-card {
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(242,179,92,0.35);
+      background: #fffdfb;
+      padding: 1rem;
+      box-shadow: 0 10px 22px rgba(0,0,0,0.05);
+    }
+
+    .past-event-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 0.4rem 1rem;
+    }
+
+    .past-event-title {
+      margin: 0;
+      font-size: 1.05rem;
+      color: var(--primary-dark);
+      font-weight: 700;
+    }
+
+    .past-event-date {
+      font-size: 0.85rem;
+      color: var(--muted);
+      background: #fff2f5;
+      border: 1px solid rgba(233,117,136,0.2);
+      padding: 0.2rem 0.65rem;
+      border-radius: 999px;
+    }
+
+    .past-event-description {
+      margin: 0.6rem 0 0.8rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .event-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+      gap: 0.5rem;
+    }
+
+    .event-gallery img {
+      width: 100%;
+      height: 90px;
+      object-fit: cover;
+      border-radius: 12px;
+      border: 1px solid rgba(0,0,0,0.08);
+    }
+
+    .past-event-actions {
+      margin-top: 0.8rem;
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
   </style>
 </head>
 
@@ -383,6 +449,7 @@
       <nav class="nav-links">
         <a href="#about">About</a>
         <a href="#schedule">Classes &amp; Calendar</a>
+        <a href="#past-events">Past Events</a>
         <a href="#gallery">Photos</a>
         <a href="#info">DD's Notes</a>
         <a href="#contact">Contact</a>
@@ -482,6 +549,36 @@
         <div class="embed-wrapper">
           <!-- Calendar is loaded via JS with cache-busting so updates appear quickly -->
           <iframe id="calendarFrame" title="Howdy Boot Calendar"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- PAST EVENTS -->
+    <section id="past-events">
+      <h2 class="section-heading">Past Events</h2>
+      <p class="section-subtitle">
+        Highlights from recent visits. Each event pulls a mini gallery from our main Google Photos album—no separate
+        albums needed.
+      </p>
+
+      <div class="card">
+        <p>
+          Add new events by dropping photo links into the shared Google Sheet tab for past events. Use a pipe (|)
+          between photo URLs so each event can show a small gallery while still keeping everything in one album.
+        </p>
+        <details class="small-note" style="margin:0.6rem 0 0.9rem;">
+          <summary style="cursor:pointer;font-weight:600;">Admin setup: how to reuse one album for every event</summary>
+          <ol style="margin:0.6rem 0 0 1.1rem; padding:0; display:grid; gap:0.35rem;">
+            <li>Keep one shared Google Photos album. Make sure the album link is shareable (anyone with the link).</li>
+            <li>For each event, open the photo in Google Photos and use “Open image in new tab” (or “Copy image address”)
+              to grab the direct image URL (googleusercontent.com).</li>
+            <li>Paste those direct image URLs into the Sheet’s <strong>photo_urls</strong> column, separated by <code>|</code>.</li>
+            <li>Put the shared album link in <strong>album_url</strong> so the “View the full album” button works.</li>
+          </ol>
+        </details>
+        <div id="pastEventsList" class="past-events-grid"></div>
+        <div class="small-note" id="pastEventsNote">
+          Past event highlights will appear here once the sheet is updated.
         </div>
       </div>
     </section>
@@ -615,6 +712,11 @@
     const DOC_BASE_URL =
       "https://docs.google.com/document/d/e/2PACX-1vSNt_ilcXbHngA8w2L-T0JfaXIp5daI2EERM9YTFvM5x99z2mPXed7bci2X0aZsViCZAhACFt2rN7cj/pub?embedded=true";
 
+    // Past events CSV (publish a sheet tab with headers: title,date,description,photo_urls,album_url)
+    // photo_urls should use direct image links (googleusercontent.com) separated with |
+    const PAST_EVENTS_CSV_URL =
+      "https://docs.google.com/spreadsheets/d/e/2PACX-1vSEzDs7LVp6yxuIwme97jEC9akDHKNlmaiH3fmyWMkqlay-CjDa84ElNe0QPUD1LVmuBm4hHGGGlnnF/pub?output=csv&gid=0";
+
     // Calendar in agenda/schedule mode instead of month
     const CAL_BASE_URL =
       "https://calendar.google.com/calendar/embed?src=453b90c61605e8533f9997458c308e04805aeb36294e4fbe58824119e2eaaba7%40group.calendar.google.com&ctz=America%2FNew_York&mode=AGENDA";
@@ -688,9 +790,142 @@
       }
     }
 
+    function parseCsv(text) {
+      const rows = [];
+      let current = [];
+      let value = "";
+      let inQuotes = false;
+
+      for (let i = 0; i < text.length; i++) {
+        const char = text[i];
+        const next = text[i + 1];
+
+        if (char === "\"") {
+          if (inQuotes && next === "\"") {
+            value += "\"";
+            i++;
+          } else {
+            inQuotes = !inQuotes;
+          }
+        } else if (char === "," && !inQuotes) {
+          current.push(value);
+          value = "";
+        } else if ((char === "\n" || char === "\r") && !inQuotes) {
+          if (value.length || current.length) {
+            current.push(value);
+            rows.push(current);
+            current = [];
+            value = "";
+          }
+        } else {
+          value += char;
+        }
+      }
+
+      if (value.length || current.length) {
+        current.push(value);
+        rows.push(current);
+      }
+
+      return rows;
+    }
+
+    async function loadPastEvents() {
+      if (!PAST_EVENTS_CSV_URL) return;
+
+      try {
+        const res = await fetch(PAST_EVENTS_CSV_URL);
+        if (!res.ok) throw new Error("Failed to fetch past events");
+        const csvText = await res.text();
+        const rows = parseCsv(csvText).filter(row => row.some(cell => cell.trim()));
+        if (!rows.length) return;
+
+        const [headers, ...dataRows] = rows;
+        const normalized = headers.map(header => header.trim().toLowerCase());
+
+        const list = document.getElementById("pastEventsList");
+        const note = document.getElementById("pastEventsNote");
+        if (!list) return;
+
+        list.innerHTML = "";
+        let rendered = 0;
+
+        dataRows.forEach(row => {
+          const record = {};
+          normalized.forEach((key, index) => {
+            record[key] = (row[index] || "").trim();
+          });
+
+          if (!record.title) return;
+
+          const card = document.createElement("div");
+          card.className = "past-event-card";
+
+          const header = document.createElement("div");
+          header.className = "past-event-header";
+
+          const title = document.createElement("h3");
+          title.className = "past-event-title";
+          title.textContent = record.title;
+
+          const date = document.createElement("span");
+          date.className = "past-event-date";
+          date.textContent = record.date || "Recent event";
+
+          header.append(title, date);
+
+          const description = document.createElement("p");
+          description.className = "past-event-description";
+          description.textContent = record.description || "";
+
+          const gallery = document.createElement("div");
+          gallery.className = "event-gallery";
+          const photoUrls = (record.photo_urls || "")
+            .split("|")
+            .map(url => url.trim())
+            .filter(Boolean);
+
+          photoUrls.forEach(url => {
+            const img = document.createElement("img");
+            img.src = url;
+            img.alt = `${record.title} photo`;
+            img.loading = "lazy";
+            gallery.appendChild(img);
+          });
+
+          const actions = document.createElement("div");
+          actions.className = "past-event-actions";
+          if (record.album_url) {
+            const link = document.createElement("a");
+            link.href = record.album_url;
+            link.target = "_blank";
+            link.rel = "noopener";
+            link.className = "btn btn-secondary";
+            link.textContent = "View the full album";
+            actions.appendChild(link);
+          }
+
+          card.append(header);
+          if (record.description) card.appendChild(description);
+          if (photoUrls.length) card.appendChild(gallery);
+          if (actions.childElementCount) card.appendChild(actions);
+
+          list.appendChild(card);
+          rendered += 1;
+        });
+
+        if (note) {
+          note.style.display = rendered ? "none" : "block";
+        }
+      } catch (err) {
+        console.error("Error loading past events:", err);
+      }
+    }
+
     document.addEventListener("DOMContentLoaded", () => {
       loadEmbeds();       // Hook up Google Doc + Calendar + Form
       loadSheetContent(); // Pull all editable text from the Sheet
+      loadPastEvents();   // Build past events mini galleries
     });
   </script>
 </body>
