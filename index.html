@@ -782,8 +782,8 @@ Dancing makes the world a little brighter! </b></p>
         const lines = csvText.split("\n").map(l => l.trim()).filter(Boolean);
         const contentMap = {};
         
-        // Always skip first row (headers)
-        for (let i = 1; i < lines.length; i++) {
+        // Start from row 1 (no header row)
+        for (let i = 0; i < lines.length; i++) {
           const raw = lines[i];
           const [rawKey, ...rest] = raw.split(",");
           const key = (rawKey || "").trim();
