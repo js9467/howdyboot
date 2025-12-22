@@ -729,16 +729,17 @@ Dancing makes the world a little brighter! </b></p>
 
   <script>
     // ---------- CONFIG: Google URLs ----------
+    // Main Content tab (key/value pairs for text content and about_gallery)
     const SHEET_CSV_URL =
-      "https://docs.google.com/spreadsheets/d/e/2PACX-1vSEzDs7LVp6yxuIwme97jEC9akDHKNlmaiH3fmyWMkqlay-CjDa84ElNe0QPUD1LVmuBm4hHGGGlnnF/pub?output=csv";
+      "https://docs.google.com/spreadsheets/d/e/2PACX-1vSEzDs7LVp6yxuIwme97jEC9akDHKNlmaiH3fmyWMkqlay-CjDa84ElNe0QPUD1LVmuBm4hHGGGlnnF/pub?gid=485438465&single=true&output=csv";
 
     const DOC_BASE_URL =
       "https://docs.google.com/document/d/e/2PACX-1vSNt_ilcXbHngA8w2L-T0JfaXIp5daI2EERM9YTFvM5x99z2mPXed7bci2X0aZsViCZAhACFt2rN7cj/pub?embedded=true";
 
-    // Past events CSV (publish a sheet tab with headers: title,date,description,photo_urls,album_url)
+    // Past events tab (headers: title,date,description,photo_urls,album_url)
     // photo_urls should use direct image links (googleusercontent.com) separated with |
     const PAST_EVENTS_CSV_URL =
-      "https://docs.google.com/spreadsheets/d/e/2PACX-1vSEzDs7LVp6yxuIwme97jEC9akDHKNlmaiH3fmyWMkqlay-CjDa84ElNe0QPUD1LVmuBm4hHGGGlnnF/pub?output=csv&gid=0";
+      "https://docs.google.com/spreadsheets/d/e/2PACX-1vSEzDs7LVp6yxuIwme97jEC9akDHKNlmaiH3fmyWMkqlay-CjDa84ElNe0QPUD1LVmuBm4hHGGGlnnF/pub?gid=0&single=true&output=csv";
 
     // Calendar in agenda/schedule mode instead of month
     const CAL_BASE_URL =
