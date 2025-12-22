@@ -411,6 +411,27 @@
       display: grid;
       gap: 1.2rem;
       margin-top: 1.2rem;
+      max-height: 1400px;
+      overflow-y: auto;
+      padding-right: 0.5rem;
+    }
+    
+    .past-events-grid::-webkit-scrollbar {
+      width: 8px;
+    }
+    
+    .past-events-grid::-webkit-scrollbar-track {
+      background: rgba(247, 164, 77, 0.1);
+      border-radius: 10px;
+    }
+    
+    .past-events-grid::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, var(--primary), var(--secondary));
+      border-radius: 10px;
+    }
+    
+    .past-events-grid::-webkit-scrollbar-thumb:hover {
+      background: linear-gradient(180deg, var(--primary-dark), var(--secondary));
     }
 
     .past-event-card {
@@ -891,17 +912,26 @@ Dancing makes the world a little brighter! </b></p>
         const note = document.getElementById("pastEventsNote");
         if (!list) return;
 
-        list.innerHTML = "";
-        let rendered = 0;
-
-        dataRows.forEach(row => {
+        // Convert rows to records and parse dates
+        const events = dataRows.map(row => {
           const record = {};
           normalized.forEach((key, index) => {
             record[key] = (row[index] || "").trim();
           });
+          return record;
+        }).filter(record => record.title);
 
-          if (!record.title) return;
+        // Sort by date (newest first)
+        events.sort((a, b) => {
+          const dateA = new Date(a.date || "1900-01-01");
+          const dateB = new Date(b.date || "1900-01-01");
+          return dateB - dateA; // Descending order
+        });
 
+        list.innerHTML = "";
+        let rendered = 0;
+
+        events.forEach(record => {
           const card = document.createElement("div");
           card.className = "past-event-card";
 
