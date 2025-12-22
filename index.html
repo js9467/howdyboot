@@ -753,17 +753,19 @@ Dancing makes the world a little brighter! </b></p>
         if (!res.ok) throw new Error("Failed to fetch sheet");
         const csvText = await res.text();
 
-        const lines = csvText.split("\n").map(l => l.trim()).filter(Boolean);
+        const rows = parseCsv(csvText);
         const contentMap = {};
         
-        // Start from row 1 (no header row)
-        for (let i = 0; i < lines.length; i++) {
-          const raw = lines[i];
-          const [rawKey, ...rest] = raw.split(",");
-          const key = (rawKey || "").trim();
-          const value = rest.join(",").trim();
-          if (key && key.toLowerCase() !== "key") contentMap[key] = value;
-        }
+        // Start from row 1 (or row 0 if no headers)
+        rows.forEach(row => {
+          if (row.length >= 2) {
+            const key = row[0].trim();
+            const value = row[1].trim();
+            if (key && key.toLowerCase() !== "key") {
+              contentMap[key] = value;
+            }
+          }
+        });
 
         document.querySelectorAll("[data-content-key]").forEach(el => {
           const key = el.getAttribute("data-content-key");
