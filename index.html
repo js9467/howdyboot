@@ -414,13 +414,14 @@
 
     .event-gallery {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
       gap: 0.5rem;
     }
 
     .event-gallery img {
       width: 100%;
-      height: 90px;
+      height: auto;
+      aspect-ratio: 4 / 3;
       object-fit: cover;
       border-radius: 12px;
       border: 1px solid rgba(0,0,0,0.08);
@@ -553,6 +554,8 @@ The dancers learn simple, upbeat line dances, then perform for retirement commun
        <b></b>  Happy Feet!
 Kind Hearts!
 Dancing makes the world a little brighter! </b></p>
+        
+        <div class="about-gallery" data-content-key="about_gallery" data-content-attr="about-gallery"></div>
       </div>
     </section>
 
@@ -791,16 +794,17 @@ Dancing makes the world a little brighter! </b></p>
             el.textContent = value;
             const digits = value.replace(/[^0-9+]/g, "");
             el.setAttribute("href", "tel:" + digits);
-          } else if (attr === "photo-gallery") {
+          } else if (attr === "photo-gallery" || attr === "about-gallery") {
             const urls = value
               .split("|")
               .map(url => url.trim())
-              .filter(Boolean);
+              .filter(Boolean)
+              .slice(0, attr === "about-gallery" ? 4 : undefined);
             el.innerHTML = "";
             urls.forEach(url => {
               const img = document.createElement("img");
               img.src = url;
-              img.alt = "Howdy Boot Line-Dancers photo";
+              img.alt = attr === "about-gallery" ? "About the Howdy Boot Line-Dancers" : "Howdy Boot Line-Dancers photo";
               img.loading = "lazy";
               el.appendChild(img);
             });
