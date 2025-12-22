@@ -781,14 +781,14 @@ Dancing makes the world a little brighter! </b></p>
 
         const lines = csvText.split("\n").map(l => l.trim()).filter(Boolean);
         const contentMap = {};
-        const startIndex = lines[0].toLowerCase().startsWith("key,") ? 1 : 0;
-
-        for (let i = startIndex; i < lines.length; i++) {
+        
+        // Always skip first row (headers)
+        for (let i = 1; i < lines.length; i++) {
           const raw = lines[i];
           const [rawKey, ...rest] = raw.split(",");
           const key = (rawKey || "").trim();
           const value = rest.join(",").trim();
-          if (key) contentMap[key] = value;
+          if (key && key.toLowerCase() !== "key") contentMap[key] = value;
         }
 
         document.querySelectorAll("[data-content-key]").forEach(el => {
